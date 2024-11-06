@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['Pikachu']
+
+roboflow:
+  workspace: gian-b0euc
+  project: pikachu-zxwjc
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/gian-b0euc/pikachu-zxwjc/dataset/1
