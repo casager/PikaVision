@@ -17,7 +17,7 @@ def test_model(model : YOLO):
 def train_pika_vision(model : YOLO) -> YOLO:
     model.train(
         data = path2pika('Dataset', 'data.yaml'),
-        epochs = 2,
+        epochs = 100,
         imgsz = 640,
         save_dir = path2pika(),
     )
@@ -29,7 +29,7 @@ def pull_last_trained_model() -> YOLO:
 
 if __name__ == "__main__":
     model = YOLO("yolo11n.pt")
-    # model = train_pika_vision(model)
+    model = train_pika_vision(model)
 
     # model = pull_last_trained_model()
-    test_model(model)
+    test_model(model) 
