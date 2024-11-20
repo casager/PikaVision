@@ -13,6 +13,8 @@ location: runs/detect/5_categories_no_aug/weights/best.pt
 
 latest model is implemented in **project3.ipynb**
 
+To download dataset through Jupyter you must update the API key. If you cant get it to work just lmk.
+
 This is trained on the dataset found at the link below. 
 No augmentation was applied to the dataset before training. Better performance may be achievable with data augmentation.
 
