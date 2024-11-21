@@ -154,7 +154,7 @@ def train_model(model : YOLO, yaml_file : str) -> YOLO:
         None: This function does not return anything.
     """
     results = model.train(
-        data = path_to('project2-dataset-5', yaml_file),
+        data = path_to('project2-dataset-3', yaml_file),
         epochs = 100,
         imgsz = 640,
         save_dir = path_to(),
