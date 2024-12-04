@@ -1,5 +1,6 @@
 # Python virtual environment
 .venv/
 env/
+myenv/
 .cache
 project2-dataset-*/
