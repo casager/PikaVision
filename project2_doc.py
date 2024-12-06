@@ -7,6 +7,7 @@ import random
 from PIL import Image
 from shuffle import train_test_split
 import pydoc
+import cv2
 
 """
 This python module serves the purpose of performing basic operation using the YOLO framework. 
@@ -150,7 +151,54 @@ def test_model(model: YOLO, sample_image: str):
     plt.imshow(image)
     plt.axis('off')
     plt.show()
+    
 
+def test_model_video(model : YOLO, video_name : str):
+    """
+    Takes the YOLO model and a sample video file and then produces a prediction for each frame.
+    The function saves the processed frames and optionally shows the predictions using matplotlib.
+
+    Parameters:
+        model (YOLO): YOLO model that you want to make predictions with.
+        video_path (str): Path to the video file to make predictions on. Can be .mp4, .avi, etc.
+
+    Returns:
+        None: This function does not return any value.
+    """
+    # Open the video using OpenCV
+    path_to_video = path_to('test_vids', video_name)
+    cap = cv2.VideoCapture(path_to_video)
+
+    # Get the video frame width, height, and frame rate
+    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    fps = cap.get(cv2.CAP_PROP_FPS)
+
+    # Prepare for saving the processed video (optional)
+    name = 'the_detected_' + video_name
+    path_to_predicted_vid = path_to('test_vids', name)
+    output_video_path = path_to_predicted_vid
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    out = cv2.VideoWriter(output_video_path, fourcc, fps, (width, height))
+
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        # Apply YOLO prediction on the current frame
+        results = model.predict(
+            source=frame,  # Feed the frame directly
+            conf=0.1
+        )
+        
+        new_frame = results[0].plot()
+        out.write(new_frame)
+
+    # Release resources
+    cap.release()
+    out.release()
+    print(f'Video saved to {path_to_predicted_vid}')
 
 def train_model(model: YOLO, yaml_file: str) -> YOLO:
     """
@@ -175,12 +223,6 @@ def train_model(model: YOLO, yaml_file: str) -> YOLO:
     )
 
 
-# Load custom model
-new_model = YOLO(
-    path_to('runs', 'detect', '5_categories_no_aug', 'weights', 'best.pt'))
-
-
-print('Press Ctrl + C to quit.')
 
 
 def live_detection(model: YOLO):
@@ -235,11 +277,40 @@ def live_detection(model: YOLO):
     cv2.destroyAllWindows()
 
 
-live_detection(new_model)
+
+
+# Load custom model
+new_model = YOLO(
+    path_to('runs', 'detect', '5_categories_no_aug', 'weights', 'best.pt'))
+
+
+print('Press Ctrl + C to quit.')
 
 while True:
-    image = input("Enter name of image to make a prediction on.\n")
+    mode = int(input("Select mode: \n 1. Single Image\n 2. Video\n 3. Live Stream\n"))
     try:
-        test_model(new_model, image)
+        if mode == 1:
+            while True:
+                print("Press 'b' to go back to main menu.")
+                image = input("Enter image name from the 'test_images' directory.\n")
+                if image == 'b':
+                    break
+                test_model(new_model, image)
+                
+        if mode == 2:
+            while True:
+                print("Press 'b' to go back to main menu.")
+                video = input("Enter video name from the 'test_vids' directory.\n")
+                if video == 'b':
+                    break
+                test_model_video(new_model, video)
+                
+        if mode == 3:
+            while True:
+                live_detection(new_model)
+                print("Press 'b' to go back to main menu.")
+                if image == 'b':
+                    break
+                
     except Exception as e:
         print(f'An error has occured: {e}')

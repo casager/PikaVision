@@ -1,11 +1,37 @@
 # PikaVision
 
-Requirements:
-  pip install ultralytics
-  Change path2pika global variable according to where your local machines stores the repo
+## Requirements:
+  All requirements are listed in the requirements.txt file. 
+  Before installing requirements it is recommended to setup a python virtual environment. 
+  To setup the environment run the following commands:
+  > python3 -m venv venv
+  To activate the environment(Linux): 
+  > source venv/bin/activate
 
-source for drone dataset https://www.kaggle.com/datasets/dasmehdixtr/drone-dataset-uav
+  To install all the requirements:
+  > pip install -r requirements.txt
 
+
+
+## Usage 
+All of our work is shown in the **project2.ipynb** file. 
+
+For simplicity, we compiled everything required for using the model into the **project2_doc.py** file. 
+
+This file implements a simple CLI for running images and videos through the model. It also has an option for livestream if your machine supports it. 
+
+To run the file: 
+> python3 project2_doc.py
+
+
+## Documentation 
+All functions are documented in the **project2_doc.html** file. 
+This was automatically generated using pydoc.
+
+
+## Dataset
+The dataset that we used to train the model can be found at the below link:
+https://app.roboflow.com/pikavision/project2-dataset/3
 
 
 ## Latest model:
