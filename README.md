@@ -23,10 +23,14 @@ This file implements a simple CLI for running images and videos through the mode
 To run the file: 
 > python3 project2_doc.py
 
+## Cost Curves
+![Alt text](runs/detect/5_categories_aug/results.png)
+
 
 ## Documentation 
 All functions are documented in the **project2_doc.html** file. 
 This was automatically generated using pydoc.
+
 
 
 ## Dataset
@@ -47,6 +51,8 @@ No augmentation was applied to the dataset before training. Better performance m
 Full dataset with no augmentation: https://app.roboflow.com/pikavision/project2-dataset/3
 
 ### Results
+THe cost function ou
+
 Validating runs/detect/train6/weights/best.pt...
 | Class      | Images | Instances | Precision (P) | Recall (R) | mAP@50 | mAP@50-95 |
 |------------|--------|-----------|---------------|------------|--------|-----------|
