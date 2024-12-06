@@ -23,7 +23,7 @@ This file implements a simple CLI for running images and videos through the mode
 To run the file: 
 > python3 project2_doc.py
 
-## Cost Curves
+## Loss Curves
 ![Alt text](runs/detect/5_categories_aug/results.png)
 
 
@@ -41,19 +41,20 @@ https://app.roboflow.com/pikavision/project2-dataset/3
 ## Latest model:
 location: runs/detect/5_categories_no_aug/weights/best.pt
 
-latest model is implemented in **project3.ipynb**
+Latest model is trained, tested, and implemented in **project2.ipynb**.
 
-To download dataset through Jupyter you must update the API key. If you cant get it to work just lmk.
+For just using the model, refer the to **usage** section.
 
 This is trained on the dataset found at the link below. 
-No augmentation was applied to the dataset before training. Better performance may be achievable with data augmentation.
+No augmentation was applied to the dataset before training. 
+
+We trained the model with augmentation as well. Unfortunately, there was little improvement for the large increase int training time. 
 
 Full dataset with no augmentation: https://app.roboflow.com/pikavision/project2-dataset/3
 
 ### Results
-THe cost function ou
 
-Validating runs/detect/train6/weights/best.pt...
+
 | Class      | Images | Instances | Precision (P) | Recall (R) | mAP@50 | mAP@50-95 |
 |------------|--------|-----------|---------------|------------|--------|-----------|
 | All        | 973    | 1019      | 0.937         | 0.948      | 0.968  | 0.811     |
